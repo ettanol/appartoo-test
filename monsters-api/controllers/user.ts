@@ -3,8 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/users');
+import { User } from "../interfaces/user";
 
-exports.signup = (req: any, res: any) => {
+exports.signup = async (req: any, res: any) => {
     let user;
     const passwordSchema = new passwordValidator()
     passwordSchema
@@ -30,6 +31,27 @@ exports.signup = (req: any, res: any) => {
     }
 }
 
-exports.login = () => {
-    console.log('user logged in');
-}
+exports.login = async (req: any, res: any, next: any) => {
+    User.findOne({pseudo : req.body.pseudo})
+    .then((user: User)=> {
+        if (!user) {
+            return res.status(401).json({error: 'Utilisateur non trouvé !'});
+        }
+        bcrypt.compare(req.body.password, user.password)
+            .then((valid: boolean) => {
+                if(!valid) {
+                    return res.status(403).json({error : 'mot de passe incorrect !'});
+                }
+                let token: string = jwt.sign(
+                    { pseudo: user.pseudo },
+                    process.env.JWT_SECRET,
+                    {expiresIn: '24h'}
+                    );
+                    console.log(token);
+                res.status(200).json({
+                    token : token,
+                });
+            })
+    })
+    .catch((error: any) => res.status(500).json({error}));
+};

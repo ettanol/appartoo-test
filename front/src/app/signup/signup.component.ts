@@ -18,7 +18,7 @@ export class SignupComponent {
     private router: Router
     ) {
       this.form = this.fb.group({
-      email: ['',Validators.required],
+      pseudo: ['',Validators.required],
       password: ['',Validators.required]
       });
     }
@@ -28,12 +28,7 @@ export class SignupComponent {
 
     if(val.pseudo && val.password) {
       this.authService.signUp(val.pseudo, val.password)
-      .subscribe(
-        (res) => {
-          console.log(res);
-          // this.login();
-        }
-      );
+      .subscribe();
 
     }
   }

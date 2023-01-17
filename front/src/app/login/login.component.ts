@@ -18,7 +18,7 @@ export class LoginComponent {
     private router: Router
     ) {
       this.form = this.fb.group({
-      email: ['',Validators.required],
+      pseudo: ['',Validators.required],
       password: ['',Validators.required]
       });
     }
@@ -29,9 +29,9 @@ export class LoginComponent {
       if (val.pseudo && val.password) {
           this.authService.login(val.pseudo, val.password)
               .subscribe(
-                  () => {
-                      console.log("User is logged in");
-                      this.router.navigateByUrl('/network');
+                  (res) => {
+                    localStorage.setItem('token', res.token);
+                    this.router.navigateByUrl('/network');
                   }
               );
       }

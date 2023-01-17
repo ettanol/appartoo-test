@@ -1,1 +1,9 @@
-<p>network works!</p>
+<section>
+    <ul class="monsters">
+        <li *ngFor="let monster of monsters">
+            <span>{{monster.pseudo}}</span>
+            <button type="button" (click)="addFriend()">Add Friend</button>
+        </li>
+    </ul>
+</section>
+<app-modal></app-modal>

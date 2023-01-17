@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const path = require('path');
 
-// const postRoutes = require('./routes/posts');
+const monstersRoutes = require('./routes/monsters');
 const userRoutes = require('./routes/user');
 
 const app = express();
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 
 // app.use('/images', express.static(path.join(__dirname, 'images')));
-// app.use('/api/posts', postRoutes);
+app.use('/api/monsters', monstersRoutes);
 app.use('/api/auth', userRoutes);
 
 module.exports = app;

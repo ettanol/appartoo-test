@@ -11,10 +11,12 @@ export class FormComponent {
 
   setLoginForm() {
     this.isLoginOpen = !this.isLoginOpen;
+    console.log(this.isLoginOpen);
     if(this.isSignUpOpen) {this.isSignUpOpen = false;} 
   }
   setSignUpForm() {
     this.isSignUpOpen = !this.isSignUpOpen;
+    console.log(this.isSignUpOpen);
     if(this.isLoginOpen) {this.isLoginOpen = false;} 
   }
 }

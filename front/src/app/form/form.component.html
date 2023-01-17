@@ -1,6 +1,4 @@
 <div class="form-selector">
-    <button type="button" (click)="setLoginForm()">Login</button>
-    <button type="button" (click)="setSignUpForm()">Sign Up</button>
+    <button type="button" routerLink="/login">Login</button>
+    <button type="button" routerLink="/signup">Sign Up</button>
 </div>
-<app-login *ngIf="isLoginOpen"></app-login>
-<app-signup *ngIf="isSignUpOpen"></app-signup>
