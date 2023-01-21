@@ -2,8 +2,13 @@
     <ul class="monsters">
         <li *ngFor="let monster of monsters">
             <span>{{monster.pseudo}}</span>
-            <button type="button" (click)="addFriend()">Add Friend</button>
+            <button type="button" (click)="addFriend($event)">Add Friend</button>
         </li>
     </ul>
+    <div>
+        <h1>Hello {{user.role}}</h1>
+    </div>
 </section>
-<app-modal></app-modal>
+<app-modifier *ngIf="openModifier"></app-modifier>
+<app-acceptance *ngIf="openAcceptance" [(peopleInvites)]="peopleInvites"></app-acceptance>
+<app-modal [childItem]="isModalOpen"></app-modal>

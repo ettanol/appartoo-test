@@ -1,0 +1,31 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+    <fieldset>
+        <legend>Login</legend>
+        <div class="form-field">
+            <label>What are you ?</label>
+            <select name="role" formControlName="role" (change)="onRoleSelected($event)">
+                <option>Warrior</option>
+                <option>Alchemist</option>
+                <option>Sorcerer</option>
+                <option>Spy</option>
+                <option>Enchanter</option>
+            </select>
+        </div>
+        <div class="form-field">
+            <label> Choose a Profile Image</label>
+            <input type="file" class="file-input" name="file"
+                [accept]="requiredFileType"
+                (change)="onFileSelected($event)" #fileUpload>
+            <div class="file-upload">
+            {{fileName || "No file uploaded yet."}}
+                <button mat-mini-fab color="primary" class="upload-btn" name="file"
+                (click)="fileUpload.click()">
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-buttons">
+        <button type="submit" class="button button-primary">Send</button>
+    </div>
+</form>

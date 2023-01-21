@@ -20,6 +20,15 @@ const userSchema = mongoose.Schema({
     isConnected: {
         type: Boolean,
     },
+    peopleInvites: {
+        type: Array,
+    },
+    friends: {
+        type: Array,
+    },
+    usersBlocked: {
+        type: Array,
+    }
 });
 userSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('User', userSchema);

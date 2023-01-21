@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit} from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { shareReplay, pipe, catchError, of, Observable } from 'rxjs';
 
@@ -9,13 +9,18 @@ import { MessageService } from './message.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnInit{
   apiServer = 'http://localhost:5000';
+  user = localStorage.length && localStorage.getItem('pseudo');
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
     ) {
+  }
+
+  ngOnInit(): void {
+    
   }
 
   signUp(pseudo: string, password: string) {
@@ -28,12 +33,13 @@ export class AuthService {
   login(pseudo:string, password:string ) {
     return this.http.post<loginRes>(`${this.apiServer}/api/auth/login`, {pseudo, password}).pipe(
       shareReplay(),
-      )
+      );
     }
 
   logout() {
-    localStorage.removeItem('token');
-    this.messageService.add('Vous êtes bien déconnecté !');
+    return this.http.post(`${this.apiServer}/api/auth/logout`, {user: this.user}).pipe(
+      shareReplay(),
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

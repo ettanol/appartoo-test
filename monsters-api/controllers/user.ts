@@ -24,6 +24,8 @@ exports.signup = async (req: any, res: any) => {
                 role: "",
                 profileImageUrl: "",
                 isConnected: false,
+                peopleInvites: [],
+                friends: [],
             })
             user.save()
             .then(() => res.status(201).json({ message: 'Utilisateur crée !'}))

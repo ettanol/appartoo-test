@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +14,10 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { RequestInterceptor } from './request.interceptor';
 import { ModalComponent } from './modal/modal.component';
+import { ModifierComponent } from './modifier/modifier.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AcceptanceComponent } from './acceptance/acceptance.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +27,10 @@ import { ModalComponent } from './modal/modal.component';
     FormComponent,
     LoginComponent,
     SignupComponent,
-    ModalComponent
+    ModalComponent,
+    ModifierComponent,
+    AcceptanceComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +38,9 @@ import { ModalComponent } from './modal/modal.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatProgressBarModule,
   ],
   providers: [
     {

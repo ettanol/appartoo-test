@@ -1,0 +1,8 @@
+<div class="invites-list">
+    <ul *ngFor="let people of peopleInvites">
+        <li>{{people}}</li>
+        <button (click)="accept($event)">accept</button>
+        <button (click)="decline($event)">decline</button>
+        <button (click)="block($event)">block</button>
+    </ul>
+</div>

@@ -30,6 +30,7 @@ export class LoginComponent {
           this.authService.login(val.pseudo, val.password)
               .subscribe(
                   (res) => {
+                    localStorage.setItem('pseudo', res.pseudo);
                     localStorage.setItem('token', res.token);
                     this.router.navigateByUrl('/network');
                   }

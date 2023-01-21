@@ -14,8 +14,8 @@ export class SignupComponent {
 
   constructor(
     private fb:FormBuilder, 
-    private authService: AuthService, 
-    private router: Router
+    private authService: AuthService,
+    private route: Router,
     ) {
       this.form = this.fb.group({
       pseudo: ['',Validators.required],

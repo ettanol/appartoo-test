@@ -4,4 +4,6 @@ export interface User {
     role?: string,
     profileImageUrl?: string,
     isConnected?: boolean,
+    peopleInvites: [],
+    friends: [],
 }

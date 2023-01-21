@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MessageService } from '../message.service';
 
 @Component({
@@ -7,10 +7,16 @@ import { MessageService } from '../message.service';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent {
-  message: string[] = [];
+  messages: string[] = [];
+  @Input() childItem: boolean = false;
+
   constructor(
     private messageService: MessageService,
   ) {
-    this.message = this.messageService.messages;
+    this.messages = this.messageService.messages;
+  }
+
+  closeModal() {
+    this.childItem = !this.childItem;
   }
 }
