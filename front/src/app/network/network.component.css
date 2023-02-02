@@ -1,0 +1,38 @@
+section {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    grid-template-rows: repeat(8, 1fr);
+}
+
+.logout{
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.monsters {
+    grid-column: 1 / 2;
+    grid-row: 2 / 9;
+    display: flex;
+    flex-direction: column;
+}
+
+.monster-element {
+    font-weight: bold;
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.presentation {
+    grid-column: 2 / 4;
+    grid-row: 2 / 9;
+    background-color: #f5f5f5;
+    opacity: 0.2;
+}

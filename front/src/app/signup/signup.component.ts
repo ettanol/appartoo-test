@@ -28,7 +28,13 @@ export class SignupComponent {
 
     if(val.pseudo && val.password) {
       this.authService.signUp(val.pseudo, val.password)
-      .subscribe();
+      .subscribe(
+        () => {alert("You've been successfully registered ! You'll be redirected to the login page.");},
+        error => {
+          if(error) {console.error(error)};
+        },
+        () => {this.route.navigate(['/login']);}
+        );
 
     }
   }

@@ -1,5 +1,5 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Event, Router } from '@angular/router';
 import { finalize, Subscription, throwIfEmpty } from 'rxjs';
@@ -13,7 +13,8 @@ import { MonstersService } from '../monsters.service';
 })
 export class ModifierComponent {
   form: FormGroup;
-  isModifierOpen: boolean = false;
+  @Input() isModifierOpen: boolean = false;
+  @Output() isModifierOpenChange = new EventEmitter<boolean>();
   formData: FormData = new FormData();
   requiredFileType = "image/jpg";
   fileName: string = '';
@@ -42,11 +43,14 @@ export class ModifierComponent {
       this.formData.set('role', role);
     }
 
-  close() {
-    this.isModifierOpen = false;
+    close() {
+      this.isModifierOpen = false;
+    this.isModifierOpenChange.emit(this.isModifierOpen);
   }
 
   onSubmit() {
-    this.monstersService.modifyUser(this.formData).subscribe();
+    this.monstersService.modifyUser(this.formData).subscribe(
+      () => this.close()
+    );
   }
 }

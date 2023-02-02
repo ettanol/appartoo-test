@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -28,13 +28,18 @@ export class LoginComponent {
 
       if (val.pseudo && val.password) {
           this.authService.login(val.pseudo, val.password)
-              .subscribe(
-                  (res) => {
-                    localStorage.setItem('pseudo', res.pseudo);
-                    localStorage.setItem('token', res.token);
-                    this.router.navigateByUrl('/network');
-                  }
+              .subscribe(() => {},
+                  (error) => {
+                    if(error) {
+                      console.error(error);
+                    }
+                  },
+                  () => {this.redirect();}
               );
       }
+    }
+
+    redirect() {
+      this.router.navigateByUrl('/network');
     }
 }

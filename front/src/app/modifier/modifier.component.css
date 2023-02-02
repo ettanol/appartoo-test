@@ -1,0 +1,36 @@
+
+form {
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    
+}
+
+label {
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: 800;
+}
+/* 
+.file-input {
+    display: none;
+} */

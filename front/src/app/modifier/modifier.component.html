@@ -1,6 +1,5 @@
-<form [formGroup]="form" (submit)="onSubmit()">
+<form [formGroup]="form" (submit)="onSubmit()" *ngIf="isModifierOpen">
     <fieldset>
-        <legend>Login</legend>
         <div class="form-field">
             <label>What are you ?</label>
             <select name="role" formControlName="role" (change)="onRoleSelected($event)">

@@ -1,14 +1,15 @@
-<section>
+<section *ngIf="isUserLoggedIn">
+    <app-logout class="logout"></app-logout>
     <ul class="monsters">
-        <li *ngFor="let monster of monsters">
+        <li *ngFor="let monster of monsters" class="monster-element">
             <span>{{monster.pseudo}}</span>
             <button type="button" (click)="addFriend($event)">Add Friend</button>
         </li>
     </ul>
-    <div>
+    <div class="presentation">
         <h1>Hello {{user.role}}</h1>
     </div>
+    <app-modifier [(isModifierOpen)]="openModifier" class="modifier"></app-modifier>
+    <app-acceptance *ngIf="openAcceptance" [(peopleInvites)]="peopleInvites"></app-acceptance>
 </section>
-<app-modifier *ngIf="openModifier"></app-modifier>
-<app-acceptance *ngIf="openAcceptance" [(peopleInvites)]="peopleInvites"></app-acceptance>
-<app-modal [childItem]="isModalOpen"></app-modal>
+<!-- <app-modal [childItem]="isModalOpen"></app-modal> -->

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 import { MonstersService } from '../monsters.service';
@@ -17,18 +18,18 @@ export class NetworkComponent implements OnInit{
   peopleInvites: string[] =  [];
   openModifier: boolean = false;
   openAcceptance: boolean = false;
+  isUserLoggedIn: boolean = false;
   
   constructor(
     private monstersService: MonstersService,
     private authService: AuthService,
+    private route: Router,
     ) {
       
     }
     
   ngOnInit(): void {
-      this.getMonsters();
-      this.getUser();
-      this.openModal();
+    this.isLoggedIn();
   }
     
   getMonsters(): void {
@@ -54,5 +55,19 @@ export class NetworkComponent implements OnInit{
 
   openModal() {
     this.isModalOpen = !this.isModalOpen;
+  }
+
+  isLoggedIn() {
+    this.authService.isLoggedIn().subscribe(
+      (res: any) => {
+      this.isUserLoggedIn = res.isConnected;
+      if(this.isUserLoggedIn) {
+        this.getMonsters();
+        this.getUser();
+        this.openModal();
+      }
+      },() => {
+        this.route.navigate(['']);
+      });
   }
 }

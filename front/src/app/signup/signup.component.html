@@ -1,5 +1,5 @@
 <div class="location-change">
-    <p>Déjà un compte ?</p>
+    <p>Already have an account ?</p>
     <button type="button" routerLink="/login">Login</button>
 </div>
 
@@ -8,12 +8,12 @@
         <legend>Sign Up</legend>
         <div class="form-field">
             <label>Pseudo:</label>
-            <input name="pseudo" formControlName="pseudo">
+            <input name="pseudo" formControlName="pseudo" maxlength="20">
         </div>
         <div class="form-field">
             <label>Password:</label>
             <input name="password" formControlName="password" 
-                   type="password">
+                   type="password" minlength="8">
         </div>
     </fieldset>
     <div class="form-buttons">
