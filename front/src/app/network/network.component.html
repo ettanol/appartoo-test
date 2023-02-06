@@ -1,15 +1,28 @@
 <section *ngIf="isUserLoggedIn">
-    <app-logout class="logout"></app-logout>
-    <ul class="monsters">
-        <li *ngFor="let monster of monsters" class="monster-element">
-            <span>{{monster.pseudo}}</span>
-            <button type="button" (click)="addFriend($event)">Add Friend</button>
-        </li>
-    </ul>
-    <div class="presentation">
-        <h1>Hello {{user.role}}</h1>
-    </div>
-    <app-modifier [(isModifierOpen)]="openModifier" class="modifier"></app-modifier>
-    <app-acceptance *ngIf="openAcceptance" [(peopleInvites)]="peopleInvites"></app-acceptance>
+  <app-logout class="logout"></app-logout>
+  <ul class="monsters">
+    <li *ngFor="let monster of monsters" class="monster-element">
+        <div class="profile">
+            <img [ngClass]="monster.profileImageUrl !== '' ? 'profile_img' : 'blank profile_img'" src={{monster.profileImageUrl}} alt="profile"/>
+            <span>{{ monster.pseudo }}</span>
+        </div>
+      <button type="button" 
+      (click)="addFriend($event)" 
+      *ngIf="!listOfFriends.includes(monster.pseudo)"
+      >Add Friend</button>
+    </li>
+  </ul>
+  <div class="presentation">
+    <h1>Hello {{ user.role }} {{user.pseudo}}</h1>
+  </div>
+  <app-modifier
+    [(isModifierOpen)]="openModifier"
+    class="modifier"
+    *ngIf="openModifier"
+  ></app-modifier>
+  <app-acceptance
+    *ngIf="openAcceptance"
+    [(peopleInvites)]="peopleInvites"
+  ></app-acceptance>
 </section>
 <!-- <app-modal [childItem]="isModalOpen"></app-modal> -->

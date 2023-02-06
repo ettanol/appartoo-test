@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
@@ -10,12 +10,13 @@ import { User } from '../User';
   templateUrl: './network.component.html',
   styleUrls: ['./network.component.css']
 })
-export class NetworkComponent implements OnInit{
+export class NetworkComponent implements OnInit, OnChanges{
   monsters: User[] = [] ;
   isModalOpen: boolean = false;
   user: any = {};
   pseudo = localStorage.getItem('pseudo');
-  peopleInvites: string[] =  [];
+  @Input() peopleInvites: string[] =  [];
+  listOfFriends: string[] = [];
   openModifier: boolean = false;
   openAcceptance: boolean = false;
   isUserLoggedIn: boolean = false;
@@ -31,26 +32,39 @@ export class NetworkComponent implements OnInit{
   ngOnInit(): void {
     this.isLoggedIn();
   }
-    
-  getMonsters(): void {
-      this.monstersService.getMonsters()
-      .subscribe(monsters => this.monsters = monsters);
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
   }
+  
+getUser() {
+  this.monstersService.getUser()
+  .subscribe(user =>{
+    if(user.role === '') {this.openModifier = true;}
+    if(user.peopleInvites.length) {
+      this.openAcceptance = true;
+      this.peopleInvites = user.peopleInvites;
+    }
+    this.listOfFriends = user.friends;
+    this.user = user});
+}
     
-  getUser() {
-    this.monstersService.getUser()
-    .subscribe(user =>{
-      if(user.role === '') {this.openModifier = true;}
-      if(user.peopleInvites.length) {
-        this.openAcceptance = true;
-        this.peopleInvites = user.peopleInvites;
-      }
-      this.user = user});
+  async getMonsters() {
+      this.monstersService.getMonsters()
+      .subscribe(async monsters => {
+        await this.getUser();
+        this.monsters = monsters.filter(monster => monster._id !== this.user._id)
+      });
   }
 
   addFriend(e: any) {
+    e.currentTarget.classList.add('selected');
     let inviteInfos = {sender: this.pseudo, receiver: e.currentTarget.previousSibling.innerText}
-    this.monstersService.addFriend(inviteInfos).subscribe();
+    this.monstersService.addFriend(inviteInfos).subscribe(
+      () => {
+        alert(`You've invited ${inviteInfos.receiver}`);
+      }
+    );
   }
 
   openModal() {
@@ -62,8 +76,8 @@ export class NetworkComponent implements OnInit{
       (res: any) => {
       this.isUserLoggedIn = res.isConnected;
       if(this.isUserLoggedIn) {
-        this.getMonsters();
         this.getUser();
+        this.getMonsters();
         this.openModal();
       }
       },() => {

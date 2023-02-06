@@ -6,7 +6,7 @@ import { Observable, tap, pipe, shareReplay } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class MonstersService implements OnInit{
+export class MonstersService {
   apiServer = 'http://localhost:5000';
   user = localStorage.getItem('pseudo');
   
@@ -14,16 +14,16 @@ export class MonstersService implements OnInit{
     private http: HttpClient,
   ) {  }
 
-  ngOnInit() {
-    this.getMonsters();
-  }
+  // ngOnInit() {
+  //   this.getMonsters();
+  // }
+  
+    getUser() {
+      return this.http.get<User>(`${this.apiServer}/api/monsters/user/${this.user}`);
+    }
   
   getMonsters (): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiServer}/api/monsters/getMonsters`);
-  }
-
-  getUser() {
-    return this.http.get<User>(`${this.apiServer}/api/monsters/user/${this.user}`);
   }
 
   addFriend(req: any) {

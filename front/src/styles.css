@@ -39,6 +39,10 @@ button {
     box-shadow: 1px 5px 5px #555;
 }
 
+button.selected {
+    display: none;
+}
+
 button:hover {
     background-color: blueviolet;
     color: #f5f5f5;

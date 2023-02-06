@@ -15,11 +15,12 @@ exports.getUser = (req, res) => {
 exports.invite = (req, res) => {
     User.findOne({ pseudo: req.body.receiver })
         .then((user) => {
-        user.peopleInvites.push(req.body.sender);
-        User.updateOne({ pseudo: req.body.receiver }, {peopleInvites : user.peopleInvites})
-        .then(()=> res.status(200).json({message: 'invite sent !'}))
-        .catch(error => res.status(500).json(error));
-        })
+        if(!user.peopleInvites.includes(req.body.sender) && !user.usersBlocked.includes(req.body.sender)) {
+            user.peopleInvites.push(req.body.sender);
+            User.updateOne({ pseudo: req.body.receiver }, {peopleInvites : user.peopleInvites})
+            .then(()=> res.status(200).json({message: 'invite sent !'}))
+            .catch(error => res.status(500).json(error));
+        }})
         .catch((error) => res.status(500).json(error));
 };
 exports.accept = (req, res) => {
