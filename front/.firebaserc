@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "appart-d3a79"
+  },
+  "targets": {
+    "appart-d3a79": {
+      "hosting": {
+        "appartoo": [
+          "appart-d3a79"
+        ]
+      }
+    }
+  }
+}

@@ -93,6 +93,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "appartoo:build:production",
+            "firebaseProject": "appart-d3a79",
+            "firebaseHostingSite": "appart-d3a79"
+          }
         }
       }
     }
