@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { MonstersService } from '../monsters.service';
 import { User } from '../User';
@@ -11,6 +12,7 @@ import { User } from '../User';
   styleUrls: ['./network.component.css']
 })
 export class NetworkComponent implements OnInit, OnChanges{
+  form: FormGroup;
   monsters: User[] = [] ;
   isModalOpen: boolean = false;
   user: any = {};
@@ -20,13 +22,17 @@ export class NetworkComponent implements OnInit, OnChanges{
   openModifier: boolean = false;
   openAcceptance: boolean = false;
   isUserLoggedIn: boolean = false;
+  isInviteFormOpen: boolean = false;
   
   constructor(
+    private fb:FormBuilder, 
     private monstersService: MonstersService,
     private authService: AuthService,
     private route: Router,
     ) {
-      
+      this.form = this.fb.group({
+        pseudo: ['',Validators.required],
+        });
     }
     
   ngOnInit(): void {
@@ -44,6 +50,7 @@ getUser() {
     if(user.peopleInvites.length) {
       this.openAcceptance = true;
       this.peopleInvites = user.peopleInvites;
+      console.log(this.peopleInvites);
     }
     this.listOfFriends = user.friends;
     this.user = user});
@@ -67,9 +74,20 @@ getUser() {
     );
   }
 
-  openModal() {
-    this.isModalOpen = !this.isModalOpen;
+  openInviteForm() {
+    this.isInviteFormOpen = !this.isInviteFormOpen;
   }
+
+  createAccount() {
+    this.authService.addInvite(this.form.value.pseudo).subscribe();
+  }
+
+
+
+
+  // openModal() {
+  //   this.isModalOpen = !this.isModalOpen;
+  // }
 
   isLoggedIn() {
     this.authService.isLoggedIn().subscribe(
@@ -78,7 +96,7 @@ getUser() {
       if(this.isUserLoggedIn) {
         this.getUser();
         this.getMonsters();
-        this.openModal();
+        // this.openModal();
       }
       },() => {
         this.route.navigate(['']);

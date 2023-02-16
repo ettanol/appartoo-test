@@ -1,5 +1,10 @@
 <section *ngIf="isUserLoggedIn">
   <app-logout class="logout"></app-logout>
+  <div>
+    <p>Want to invite a friend ?</p>
+    <button (click)="openInviteForm()"> Open </button>
+    <app-signup *ngIf="isInviteFormOpen"></app-signup>
+  </div>
   <ul class="monsters">
     <li *ngFor="let monster of monsters" class="monster-element">
         <div class="profile">
@@ -8,10 +13,18 @@
         </div>
       <button type="button" 
       (click)="addFriend($event)" 
-      *ngIf="!listOfFriends.includes(monster.pseudo)"
+      *ngIf="!listOfFriends.includes(monster.pseudo) && !peopleInvites.includes(monster.pseudo)"
       >Add Friend</button>
     </li>
   </ul>
+  <div class="friends">
+    <h1>List of Friends</h1>
+    <ul>
+      <li *ngFor="let friend of listOfFriends">
+        <h2>{{friend}}</h2>
+      </li>
+    </ul>
+  </div>
   <div class="presentation">
     <h1>Hello {{ user.role }} {{user.pseudo}}</h1>
   </div>

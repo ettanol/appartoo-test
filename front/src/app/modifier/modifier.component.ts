@@ -1,8 +1,6 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Event, Router } from '@angular/router';
-import { finalize, Subscription, throwIfEmpty } from 'rxjs';
 
 import { MonstersService } from '../monsters.service';
 

@@ -17,12 +17,16 @@ section {
 
 .monsters {
     grid-column: 1 / 2;
-    grid-row: 2 / 9;
+    grid-row: 2 / 5;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 }
 
+.friends {
+    grid-column: 1/2;
+    grid-row: 5/9;
+}
 .monster-element {
     font-weight: bold;
     margin: 5px;

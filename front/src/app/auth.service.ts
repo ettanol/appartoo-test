@@ -21,6 +21,10 @@ export class AuthService{
     ) {
   }
 
+  addInvite(pseudo: string) {
+    return this.http.post<User>(`${this.apiServer}/api/auth/addAccount`, {pseudo})
+  }
+
   signUp(pseudo: string, password: string) {
     return this.http.post<User>(`${this.apiServer}/api/auth/signup`, {pseudo, password});
   }

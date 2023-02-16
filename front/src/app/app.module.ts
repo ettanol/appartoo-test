@@ -18,6 +18,7 @@ import { ModifierComponent } from './modifier/modifier.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AcceptanceComponent } from './acceptance/acceptance.component';
 import { LogoutComponent } from './logout/logout.component';
+import { LogRedirectComponent } from './log-redirect/log-redirect.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { LogoutComponent } from './logout/logout.component';
     ModifierComponent,
     AcceptanceComponent,
     LogoutComponent,
+    LogRedirectComponent,
   ],
   imports: [
     BrowserModule,

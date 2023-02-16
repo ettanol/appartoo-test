@@ -1,11 +1,7 @@
-<div class="location-change">
-    <p>Already have an account ?</p>
-    <button type="button" routerLink="/login">Login</button>
-</div>
-
+<app-log-redirect></app-log-redirect>
 <form [formGroup]="form">
     <fieldset>
-        <legend>Sign Up</legend>
+        <legend>Create an account</legend>
         <div class="form-field">
             <label>Pseudo:</label>
             <input name="pseudo" formControlName="pseudo" maxlength="20">
@@ -18,6 +14,6 @@
     </fieldset>
     <div class="form-buttons">
         <button class="button button-primary" 
-                (click)="signUp()">sign Up</button>
+                (click)="signUp()">Create Account</button>
     </div>
 </form>

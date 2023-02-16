@@ -89,3 +89,7 @@ exports.logout = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
     })
     .catch(() => res.status(500).json({message: "Erreur Serveur. Nous n'avons pas pu vous déconnecter"}) );
 });
+
+exports.addAccount = (req, res) => {
+    console.log(req);
+}
