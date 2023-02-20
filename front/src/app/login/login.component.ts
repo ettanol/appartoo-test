@@ -28,13 +28,17 @@ export class LoginComponent {
 
       if (val.pseudo && val.password) {
           this.authService.login(val.pseudo, val.password)
-              .subscribe(() => {},
+              .subscribe(() => {
+                this.form.reset();
+              },
                   (error) => {
                     if(error) {
                       console.error(error);
                     }
                   },
-                  () => {this.redirect();}
+                  () => {
+                    this.redirect();
+                  }
               );
       }
     }

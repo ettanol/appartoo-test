@@ -22,7 +22,7 @@ export class NetworkComponent implements OnInit, OnChanges{
   openModifier: boolean = false;
   openAcceptance: boolean = false;
   isUserLoggedIn: boolean = false;
-  isInviteFormOpen: boolean = false;
+  isFormOpen: boolean = false;
   
   constructor(
     private fb:FormBuilder, 
@@ -75,20 +75,9 @@ getUser() {
   }
 
   openInviteForm() {
-    this.isInviteFormOpen = !this.isInviteFormOpen;
+    this.isFormOpen = !this.isFormOpen;
   }
-
-  createAccount() {
-    this.authService.addInvite(this.form.value.pseudo).subscribe();
-  }
-
-
-
-
-  // openModal() {
-  //   this.isModalOpen = !this.isModalOpen;
-  // }
-
+  
   isLoggedIn() {
     this.authService.isLoggedIn().subscribe(
       (res: any) => {
@@ -96,7 +85,6 @@ getUser() {
       if(this.isUserLoggedIn) {
         this.getUser();
         this.getMonsters();
-        // this.openModal();
       }
       },() => {
         this.route.navigate(['']);

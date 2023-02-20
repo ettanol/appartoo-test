@@ -1,5 +1,5 @@
 <app-log-redirect></app-log-redirect>
-<form [formGroup]="form">
+<form [formGroup]="form" *ngIf="isFormOpen">
     <fieldset>
         <legend>Create an account</legend>
         <div class="form-field">

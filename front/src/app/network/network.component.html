@@ -3,7 +3,8 @@
   <div>
     <p>Want to invite a friend ?</p>
     <button (click)="openInviteForm()"> Open </button>
-    <app-signup *ngIf="isInviteFormOpen"></app-signup>
+    <app-signup 
+    [(isFormOpen)]="isFormOpen"></app-signup>
   </div>
   <ul class="monsters">
     <li *ngFor="let monster of monsters" class="monster-element">
